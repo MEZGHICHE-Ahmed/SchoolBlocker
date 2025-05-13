@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Auto-Fill</title>
+    <style>
+        body {
+            width: 250px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button#stop {
+            background-color: #f44336;
+        }
+        button#stop:hover {
+            background-color: #d32f2f;
+        }
+        button#clear {
+            background-color: #ff9800;
+        }
+        button#clear:hover {
+            background-color: #f57c00;
+        }
+        button#saveJson {
+            background-color: #2196F3;
+        }
+        button#saveJson:hover {
+            background-color: #0b7dda;
+        }
+        button#saveApiKey {
+            background-color: #673AB7;
+        }
+        button#saveApiKey:hover {
+            background-color: #5e35b1;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .shortcut-info {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: -5px;
+            margin-bottom: 5px;
+            text-align: right;
+            font-style: italic;
+        }
+        .section-divider {
+            margin: 10px 0;
+            border-top: 1px solid #ddd;
+        }
+        .api-key-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        .api-key-container label {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .api-key-container input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        /* Styles pour le School Blocker */
+        .school-blocker-section {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #4CAF50;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .school-blocker-info {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Form Auto-Fill</h2>
+            <p>Sauvegardez et remplissez automatiquement vos formulaires</p>
+        </div>
+        
+        <div class="school-blocker-section">
+            <div class="toggle-container">
+                <span>School Blocker</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="schoolBlockerToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="school-blocker-info">
+                Bloque automatiquement les offres des écoles non désirées
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button id="start">Remplir automatiquement</button>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <div class="api-key-container">
+            <label for="mistral-api-key">Clé API Mistral:</label>
+            <input type="password" id="mistral-api-key" placeholder="Entrez votre clé API">
+            <button id="saveApiKey">Sauvegarder la clé API</button>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <button id="saveJson">Sauvegarder les données</button>
+        
+        <button id="clear">Supprimer les données sauvegardées</button>
+        
+        <div id="status" class="status" style="display: none;"></div>
+        <div id="puter-chat"></div>
+    </div>
+    <script type="module" src="popup.js"></script>
+</body>
+</html>

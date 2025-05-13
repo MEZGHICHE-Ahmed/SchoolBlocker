@@ -1,0 +1,54 @@
+<div id="global-formulaire-data" data-has-content="true" style="display: none; position: absolute; visibility: hidden;">{
+  "informationsPersonnelles": {
+    "nom": "s",
+    "prenom": "s",
+    "email": "sss@gmail.com",
+    "telephone": "s",
+    "adresse": "s",
+    "codePostal": "94320",
+    "ville": "s",
+    "pays": "s",
+    "dateNaissance": "2025-04-17",
+    "linkedIn": "https://www.linkedin.com/search/results/all/?keyw%40"
+  },
+  "experiencesProfessionnelles": [
+    {
+      "id": 1,
+      "poste": "a",
+      "entreprise": "a",
+      "lieu": "a",
+      "dateDebut": "2025-02",
+      "dateFin": "",
+      "enCours": true,
+      "description": "aaa"
+    }
+  ],
+  "formations": [
+    {
+      "id": 1,
+      "diplome": "a",
+      "etablissement": "a",
+      "lieu": "a",
+      "dateDebut": "2025-06",
+      "dateFin": "",
+      "enCours": true,
+      "description": "a"
+    }
+  ],
+  "competencesLinguistiques": [
+    {
+      "id": 1,
+      "langue": "a",
+      "niveau": "intermediaire",
+      "certificat": "a"
+    }
+  ],
+  "competencesTechniques": [
+    {
+      "id": 1,
+      "competence": "a",
+      "niveau": "intermediaire"
+    }
+  ],
+  "dateSubmission": "2025-04-30T14:53:48.061Z"
+}</div>

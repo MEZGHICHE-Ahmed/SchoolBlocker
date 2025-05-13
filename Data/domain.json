@@ -1,0 +1,14 @@
+{
+    "hellowork": {
+        "namediv": ".tw-typo-s.tw-inline",
+        "offerdiv": "[class*='tw-grid'][class*='tw-size-full'][class*='tw-p-4']"
+    },
+    "linkedin": {
+        "namediv": "TXoGQNXCUrIHLHDQumwAmixJpSSTlNidVPmcY",
+        "offerdiv": ".ember-view.NqdiGXxMTLrdUjjOmOpVSyTKjaIRvclPFdFQcE.occludable-update.p0.relative.scaffold-layout__list-item"
+    },
+    "indeed": {
+        "namediv": ".css-1h7lukg.eu4oa1w0",
+        "offerdiv": ".job_seen_beacon"
+    }
+}
