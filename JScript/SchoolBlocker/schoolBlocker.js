@@ -1,6 +1,6 @@
 import { checkCurrentDomain } from './domainChecker.js';
 import { matchSchools } from './schoolMatcher.js';
-import { blockOffers } from './offerBlocker.js';
+import { blockOffers, unblockOffers } from './offerBlocker.js';
 
 let domainConfig = null;
 let schools = null;
@@ -126,12 +126,8 @@ export function stopSchoolBlocker() {
         observer = null;
     }
     
-    // Réinitialiser les offres bloquées
-    const blockedOffers = document.querySelectorAll('.blocked-school');
-    blockedOffers.forEach(offer => {
-        offer.classList.remove('blocked-school');
-        offer.style = ''; // Réinitialiser les styles
-    });
+    // Débloquer les offres
+    unblockOffers();
 }
 
 // Écouter les messages du popup

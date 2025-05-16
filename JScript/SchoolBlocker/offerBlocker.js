@@ -1,6 +1,9 @@
 export function blockOffers(matchingOffers, domainConfig) {
     try {
         matchingOffers.forEach((offer, index) => {
+            // Sauvegarder le contenu original
+            const originalContent = offer.element.innerHTML;
+            offer.element.setAttribute('data-original-content', originalContent);
             
             // Sauvegarder la position et les dimensions originales
             const originalRect = offer.element.getBoundingClientRect();
@@ -60,9 +63,33 @@ export function blockOffers(matchingOffers, domainConfig) {
             offer.element.style.pointerEvents = 'none';
             offer.element.style.opacity = '1';
             
+            // Ajouter la classe pour identifier les offres bloquées
+            offer.element.classList.add('blocked-school');
         });
         
     } catch (error) {
         console.error('[OfferBlocker] Erreur lors du blocage des offres:', error);
+    }
+}
+
+export function unblockOffers() {
+    try {
+        const blockedOffers = document.querySelectorAll('.blocked-school');
+        blockedOffers.forEach(offer => {
+            // Restaurer le contenu original
+            const originalContent = offer.getAttribute('data-original-content');
+            if (originalContent) {
+                offer.innerHTML = originalContent;
+                offer.removeAttribute('data-original-content');
+            }
+            
+            // Réinitialiser les styles
+            offer.style = '';
+            
+            // Retirer la classe de blocage
+            offer.classList.remove('blocked-school');
+        });
+    } catch (error) {
+        console.error('[OfferBlocker] Erreur lors du déblocage des offres:', error);
     }
 } 
