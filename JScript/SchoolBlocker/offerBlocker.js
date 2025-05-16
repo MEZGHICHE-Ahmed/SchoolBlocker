@@ -1,8 +1,6 @@
 export function blockOffers(matchingOffers, domainConfig) {
-    console.log('[OfferBlocker] Début du blocage des offres...');
     try {
         matchingOffers.forEach((offer, index) => {
-            console.log(`[OfferBlocker] Traitement de l'offre ${index + 1}:`, offer.name);
             
             // Sauvegarder la position et les dimensions originales
             const originalRect = offer.element.getBoundingClientRect();
@@ -62,10 +60,8 @@ export function blockOffers(matchingOffers, domainConfig) {
             offer.element.style.pointerEvents = 'none';
             offer.element.style.opacity = '1';
             
-            console.log(`[OfferBlocker] Offre ${index + 1} bloquée avec succès`);
         });
         
-        console.log(`[OfferBlocker] Blocage terminé. ${matchingOffers.length} offres bloquées avec succès`);
     } catch (error) {
         console.error('[OfferBlocker] Erreur lors du blocage des offres:', error);
     }

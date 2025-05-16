@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Form Auto-Fill",
+    "name": "School Blocker",
     "version": "1.0",
     "description": "Sauvegarde et remplissage automatique des champs de formulaire",
     "action": {

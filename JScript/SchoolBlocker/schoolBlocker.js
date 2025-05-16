@@ -12,23 +12,17 @@ let isSchoolBlockerEnabled = false;
  */
 async function applyBlocker() {
     if (!isSchoolBlockerEnabled) {
-        console.log('[SchoolBlocker] Blocage désactivé, arrêt de l\'application');
         return;
     }
 
-    console.log('[SchoolBlocker] Application du blocage...');
     try {
         // Trouver les offres correspondant aux écoles
-        console.log('[SchoolBlocker] Recherche des offres correspondantes...');
         const matchingOffers = await matchSchools(domainConfig, schools);
-        console.log('[SchoolBlocker] Offres correspondantes trouvées:', matchingOffers.length);
 
         // Bloquer les offres correspondantes
         if (matchingOffers.length > 0) {
-            console.log('[SchoolBlocker] Début du blocage des offres...');
             blockOffers(matchingOffers, domainConfig);
         } else {
-            console.log('[SchoolBlocker] Aucune offre à bloquer');
         }
     } catch (error) {
         console.error('[SchoolBlocker] Erreur lors de l\'application du blocage:', error);
@@ -40,28 +34,23 @@ async function applyBlocker() {
  */
 function setupObserver() {
     if (observer) {
-        console.log('[SchoolBlocker] Arrêt de l\'observateur existant');
         observer.disconnect();
         observer = null;
     }
 
     if (!isSchoolBlockerEnabled) {
-        console.log('[SchoolBlocker] Blocage désactivé, pas d\'observateur configuré');
         return;
     }
 
-    console.log('[SchoolBlocker] Configuration de l\'observateur de mutations...');
     
     // Créer l'observateur
     observer = new MutationObserver((mutations) => {
         if (!isSchoolBlockerEnabled) {
-            console.log('[SchoolBlocker] Blocage désactivé, arrêt de l\'observateur');
             observer.disconnect();
             observer = null;
             return;
         }
 
-        console.log('[SchoolBlocker] Changements détectés dans le DOM');
         
         // Vérifier si les changements concernent des éléments pertinents
         const shouldReapply = mutations.some(mutation => {
@@ -80,7 +69,6 @@ function setupObserver() {
         });
 
         if (shouldReapply) {
-            console.log('[SchoolBlocker] Changements pertinents détectés, réapplication du blocage...');
             applyBlocker();
         }
     });
@@ -95,29 +83,25 @@ function setupObserver() {
 
     // Démarrer l'observation
     observer.observe(document.body, config);
-    console.log('[SchoolBlocker] Observateur de mutations configuré et actif');
 }
 
-async function startSchoolBlocker() {
-    console.log('[SchoolBlocker] Démarrage du blocage des écoles...');
+/**
+ * Démarre le School Blocker
+ */
+export async function startSchoolBlocker() {
     isSchoolBlockerEnabled = true;
     
     try {
         // Vérifier si le domaine actuel est dans notre liste
-        console.log('[SchoolBlocker] Vérification du domaine actuel...');
         domainConfig = await checkCurrentDomain();
         if (!domainConfig) {
-            console.log('[SchoolBlocker] Domaine non supporté, arrêt du processus');
             isSchoolBlockerEnabled = false;
             return;
         }
-        console.log('[SchoolBlocker] Configuration du domaine trouvée:', domainConfig);
 
         // Récupérer la liste des écoles à bloquer
-        console.log('[SchoolBlocker] Chargement de la liste des écoles...');
         schools = await fetch(chrome.runtime.getURL('Data/schools.json'))
             .then(response => response.json());
-        console.log('[SchoolBlocker] Nombre d\'écoles à bloquer:', schools.length);
 
         // Appliquer le blocage initial
         await applyBlocker();
@@ -130,8 +114,10 @@ async function startSchoolBlocker() {
     }
 }
 
-function stopSchoolBlocker() {
-    console.log('[SchoolBlocker] Arrêt du blocage des écoles...');
+/**
+ * Arrête le School Blocker
+ */
+export function stopSchoolBlocker() {
     isSchoolBlockerEnabled = false;
     
     // Arrêter l'observateur
